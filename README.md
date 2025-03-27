@@ -20,7 +20,7 @@
 1. Клонируй репозиторий:
 
 ```bash
-git clone https://github.com/your-user/gitea-s3.git
+git clone https://github.com/VladimirKraswov/gitea-s3.git
 cd gitea-s3
 ```
 
