@@ -1,5 +1,5 @@
 #!/usr/bin/env/bash
-set -euo pipefail
+set -eo pipefail  # Убираем -u, чтобы не завершаться на unbound variables
 
 echo "=== 🚀 Запуск установщика Gitea + S3 (s3fs) ==="
 
@@ -25,7 +25,8 @@ source .env
 
 # Проверка обязательных параметров
 for var in S3_BUCKET S3_ENDPOINT S3_ACCESS_KEY S3_SECRET_KEY MOUNT_PATH GITEA_DOMAIN GITEA_HTTP_PORT GITEA_SSH_PORT SERVICE_NAME DATA_VOLUME REPOS_PATH GITEA_ADMIN_USERNAME GITEA_ADMIN_PASSWORD GITEA_ADMIN_EMAIL; do
-  if [ -z "${!var}" ]; then
+  eval "value=\$$var"  # Используем eval для получения значения переменной
+  if [ -z "$value" ]; then
     echo "❌ Ошибка: Переменная ${var} не задана в .env."
     exit 1
   fi
@@ -45,6 +46,7 @@ echo "  GITEA_ADMIN_USERNAME = ${GITEA_ADMIN_USERNAME}"
 echo "  GITEA_ADMIN_EMAIL   = ${GITEA_ADMIN_EMAIL}"
 echo
 
+# Остальной код остается без изменений...
 # 2. Настройка репозитория Docker
 echo "> 📦 Настраиваем репозиторий Docker для ${DISTRO}..."
 if [ -f /etc/apt/sources.list.d/docker.list ]; then
