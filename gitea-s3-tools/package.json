@@ -1,0 +1,15 @@
+{
+  "name": "gitea-s3-tools",
+  "version": "1.0.0",
+  "description": "Tools for Gitea with S3 integration",
+  "main": "gitea-client.js",
+  "scripts": {
+    "start": "node gitea-client.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5"
+  },
+  "author": "Vladimir Kraswov",
+  "license": "MIT"
+}

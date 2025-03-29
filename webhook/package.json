@@ -1,0 +1,15 @@
+{
+  "name": "gitea-webhook",
+  "version": "1.0.0",
+  "description": "Webhook server for Gitea push events",
+  "main": "webhook.js",
+  "scripts": {
+    "start": "node webhook.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}

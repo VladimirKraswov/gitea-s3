@@ -1,0 +1,24 @@
+# gitea-s3/docker-compose.yml
+version: "3"
+services:
+  gitea:
+    image: gitea/gitea:latest
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__server__DOMAIN=${GITEA_DOMAIN}
+      - GITEA__server__HTTP_PORT=3000
+      - GITEA__server__SSH_PORT=22
+      - GITEA__repository__ROOT=${REPOS_PATH}
+      - GITEA__admin__username=${GITEA_ADMIN_USERNAME}
+      - GITEA__admin__password=${GITEA_ADMIN_PASSWORD}
+      - GITEA__admin__email=${GITEA_ADMIN_EMAIL}
+      - GITEA__service__DISABLE_REGISTRATION=${GITEA_DISABLE_REGISTRATION}
+    ports:
+      - "3000:3000"
+      - "222:22"
+    volumes:
+      - /mnt/s3:/data/git/repositories
+      - ./data:/data
+    restart: unless-stopped
